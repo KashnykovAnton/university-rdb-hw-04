@@ -1,0 +1,28 @@
+SELECT * FROM customers
+INNER JOIN orders ON customers.id = orders.customer_id
+INNER JOIN order_details ON orders.id = order_details.order_id
+INNER JOIN products ON order_details.product_id = products.id
+INNER JOIN suppliers ON products.supplier_id = suppliers.id
+INNER JOIN shippers ON orders.shipper_id = shippers.id
+INNER JOIN employees ON orders.employee_id = employees.employee_id
+INNER JOIN categories ON products.category_id = categories.id
+
+OR (without all IDs)
+
+SELECT 
+orders.id, orders.date, 
+customers.name, customers.contact, customers.address, customers.city, customers.postal_code, customers.country,
+order_details.quantity,
+products.name, products.unit, products.price,
+suppliers.name, suppliers.contact, suppliers.address, suppliers.city, suppliers.postal_code, suppliers.country, suppliers.phone,
+shippers.name, shippers.phone,
+employees.last_name, employees.first_name, employees.birthdate, employees.photo, employees.notes,
+categories.name, categories.description
+FROM orders
+INNER JOIN customers ON customers.id = orders.customer_id
+INNER JOIN order_details ON orders.id = order_details.order_id
+INNER JOIN products ON order_details.product_id = products.id
+INNER JOIN suppliers ON products.supplier_id = suppliers.id
+INNER JOIN shippers ON orders.shipper_id = shippers.id
+INNER JOIN employees ON orders.employee_id = employees.employee_id
+INNER JOIN categories ON products.category_id = categories.id
